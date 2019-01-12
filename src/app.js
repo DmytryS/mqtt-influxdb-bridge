@@ -4,6 +4,7 @@ import influx from 'influx';
 export class Bridge {
   constructor() {
     this._mqttClient = mqtt.connect(process.env.BROKER_ADR);
+    this._mqttClient.on('error', this._onMqttError);
     this._influx = new influx.InfluxDB(process.env.DB_ADR);
   }
 
@@ -11,7 +12,6 @@ export class Bridge {
     await this._connectToBroker();
     await this._checkIfDbExists();
 
-    this._mqttClient.on('error', this._onMqttError);
     this._mqttClient.subscribe('#', this._onMqttError);
     this._mqttClient.on('message', this._saveToDB.bind(this));
   }
