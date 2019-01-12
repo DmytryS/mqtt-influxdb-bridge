@@ -1,0 +1,35 @@
+{
+  "name": "mqtt-influxdb-bridge",
+  "version": "1.0.0",
+  "description": "Bridge for saving messages from mqtt to influxdb",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "node ./src/runner.js"
+  },
+  "author": "Dmytry Shvaika",
+  "license": "MIT",
+  "dependencies": {
+    "influx": "^5.0.0-alpha.4",
+    "mqtt": "^2.18.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmytryS/mqtt-influxdb-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DmytryS/mqtt-influxdb-bridge/issues"
+  },
+  "homepage": "https://github.com/DmytryS/mqtt-influxdb-bridge#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
