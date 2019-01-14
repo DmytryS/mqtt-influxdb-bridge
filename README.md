@@ -25,4 +25,4 @@ Eexample:
 
 ## Running with Docker
 
-    docker run -e BROKER_ADR="tcp://mqtt-broker:1883" -e DB_ADR="http://influxdb:8086" -e DB="mqtt" loginkr/mqtt-influxdb-bridge
+    docker run -e BROKER_ADR=tcp://mqtt-broker:1883 -e DB_ADR=http://influxdb:8086 -e DB=mqtt loginkr/mqtt-influxdb-bridge
