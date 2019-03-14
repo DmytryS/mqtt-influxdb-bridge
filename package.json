@@ -8,10 +8,6 @@
   },
   "author": "Dmytry Shvaika",
   "license": "MIT",
-  "dependencies": {
-    "influx": "^5.0.0-alpha.4",
-    "mqtt": "^2.18.8"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DmytryS/mqtt-influxdb-bridge.git"
@@ -20,6 +16,10 @@
     "url": "https://github.com/DmytryS/mqtt-influxdb-bridge/issues"
   },
   "homepage": "https://github.com/DmytryS/mqtt-influxdb-bridge#readme",
+  "dependencies": {
+    "influx": "^5.0.0-alpha.4",
+    "mqtt": "^2.18.8"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

@@ -1,5 +1,7 @@
 # MQTT-InfluxDB-bridge
 
+[![Build Status](https://travis-ci.com/DmytryS/mqtt-influxdb-bridge.svg?branch=master)](https://travis-ci.com/DmytryS/mqtt-influxdb-bridge.svg?branch=master)
+
 Application listens for MQTT-broker and stores messages to InfluxDB.
 
     value = 31
@@ -15,9 +17,10 @@ is sent to InfluxDB with values
 ## Running
 
 Script needs three environment variables
-* ```BROKER_ADR``` - connection string to MQTT-broker
-* ```DB_ADR``` - connection string to InfluxDB
-* ```DB``` - InfluxDB database name
+
+- `BROKER_ADR` - connection string to MQTT-broker
+- `DB_ADR` - connection string to InfluxDB
+- `DB` - InfluxDB database name
 
 Eexample:
 
