@@ -24,8 +24,8 @@ Script needs three environment variables
 
 Eexample:
 
-    env BROKER_ADR=tcp://localhost:1883 DB_ADR=http://localhost:8086 DB=mqtt npm start
+    env BROKER_ADR=mqtt://user:password@localhost:1883 DB_ADR=http://localhost:8086 DB=mqtt npm start
 
 ## Running with Docker
 
-    docker run -e BROKER_ADR=tcp://mqtt-broker:1883 -e DB_ADR=http://influxdb:8086 -e DB=mqtt loginkr/mqtt-influxdb-bridge
+    docker run -e BROKER_ADR=mqtt://user:password@localhost:1883 -e DB_ADR=http://localhost:8086 -e DB=mqtt loginkr/mqtt-influxdb-bridge
