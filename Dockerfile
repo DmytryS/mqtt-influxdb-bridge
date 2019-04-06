@@ -6,8 +6,11 @@ COPY . .
 FROM base AS dependencies
 RUN apk add --no-cache make gcc g++ python
 RUN npm install
+RUN npm run build
 
 FROM base AS release
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
+COPY --from=dependencies /usr/src/app/build ./build
 RUN rm -f package-lock.json
+RUN rm -rf src
 CMD ["npm", "start"]

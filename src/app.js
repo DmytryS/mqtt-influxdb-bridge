@@ -14,7 +14,7 @@ process.on('unhandledRejection', (err) => {
   appLogger.error('Unhandled rejection', err);
 });
 process.on('SIGTERM', async () => {
-  appLogger.info('Received SIGTERM, going to shutdown server.');
+  appLogger.info('Received SIGTERM, going to shutdown bridge.');
   await bridge.disconnect();
   appLogger.info('Exited... Buy :)');
 });
