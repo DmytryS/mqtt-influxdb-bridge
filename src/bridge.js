@@ -43,7 +43,7 @@ export default class Bridge {
 
       // eslint-disable-next-line
       if (isNaN(messageString)) {
-        fields.value = messageString;
+        fields.string = messageString;
       } else {
         fields.value = parseFloat(messageString);
       }
