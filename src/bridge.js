@@ -41,6 +41,8 @@ export default class Bridge {
       const messageString = message.toString();
       const fields = {};
 
+      console.log('Message: ', messageString);
+
       if (Number.isNaN(messageString)) {
         fields.value = messageString;
         console.log('NaN', fields);
