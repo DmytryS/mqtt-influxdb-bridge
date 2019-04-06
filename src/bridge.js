@@ -35,19 +35,19 @@ export default class Bridge {
     );
   }
 
-  _saveToDB(topic, message) {
+  async _saveToDB(topic, message) {
     try {
       const [location, device, measurement] = topic.split('/');
       const messageString = message.toString();
       const fields = {};
 
       if (Number.isNaN(messageString)) {
-        fields.string = messageString;
+        fields.value = messageString;
       } else {
         fields.value = parseFloat(messageString);
       }
 
-      this._influx.writePoints(
+      await this._influx.writePoints(
         [
           {
             measurement,
