@@ -1,19 +1,12 @@
 {
-    "presets": [
-      ["env", {
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
         "targets": {
-          "node": "current"
+          "node": true
         }
-      }]
-    ],
-    "plugins": [
-      "add-module-exports",
-      "transform-class-properties",
-      "transform-decorators",
-      "transform-object-rest-spread",
-      "transform-runtime",
-      "transform-async-to-generator"
-    ],
-    "ignore": ["node_modules"]
-  }
-  
+      }
+    ]
+  ]
+}

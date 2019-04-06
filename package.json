@@ -4,7 +4,13 @@
   "description": "Bridge for saving messages from mqtt to influxdb",
   "main": "./src/app.js",
   "scripts": {
-    "start": "node ./src/runner.js"
+    "start": "NODE_ENV=production node ./build/src/app.js",
+    "dev": "NODE_ENV=development  nodemon --exec babel-node  ./src/app.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel -d ./build ./ -s --ignore 'node_modules/**/*.js'",
+    "build": "npm run clean && npm run build-server",
+    "lint": "eslint src/ --quiet",
+    "lint:fix": "eslint src/ --fix"
   },
   "author": "Dmytry Shvaika",
   "license": "MIT",
@@ -18,18 +24,17 @@
   "homepage": "https://github.com/DmytryS/mqtt-influxdb-bridge#readme",
   "dependencies": {
     "influx": "^5.0.0-alpha.4",
+    "log4js": "^4.1.0",
     "mqtt": "^2.18.8"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.10"
   }
 }

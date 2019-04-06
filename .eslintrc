@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "no-unused-vars": ["warn"],
+    "no-param-reassign": ["warn"],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ],
+    "no-trailing-spaces": [
+      "error",
+      {
+        "skipBlankLines": true,
+        "ignoreComments": true
+      }
+    ]
+  }
+}
