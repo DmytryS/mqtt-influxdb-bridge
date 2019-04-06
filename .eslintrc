@@ -17,6 +17,8 @@
         "skipBlankLines": true,
         "ignoreComments": true
       }
-    ]
+    ],
+    "use-isnan": 0,
+    "trailing-comma": false
   }
 }

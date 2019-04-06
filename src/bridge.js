@@ -41,17 +41,12 @@ export default class Bridge {
       const messageString = message.toString();
       const fields = {};
 
-      console.log('Message: ', messageString);
-
-      if (Number.isNaN(messageString)) {
+      // eslint-disable-next-line
+      if (isNaN(messageString)) {
         fields.value = messageString;
-        console.log('NaN', fields);
       } else {
         fields.value = parseFloat(messageString);
-        console.log('N', fields);
       }
-
-      console.log('Send: ', fields);
 
       await this._influx.writePoints(
         [
