@@ -43,9 +43,13 @@ export default class Bridge {
 
       if (Number.isNaN(messageString)) {
         fields.value = messageString;
+        console.log('NaN', fields);
       } else {
         fields.value = parseFloat(messageString);
+        console.log('N', fields);
       }
+
+      console.log('Send: ', fields);
 
       await this._influx.writePoints(
         [
