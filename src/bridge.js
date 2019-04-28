@@ -10,7 +10,9 @@ export default class Bridge {
     this._mqttClient.on('connect', this._onConnectBroker.bind(this));
     this._mqttClient.on('close', this._onDisconnectBroker.bind(this));
 
+    this._logger.info(`Connecting to InfluxDB host ${process.env.DB_ADR}`);
     this._influx = new InfluxDB(process.env.DB_ADR);
+    this._influx.ping(5000).then(this._influxDbPing);
   }
 
   async connect() {
@@ -85,5 +87,15 @@ export default class Bridge {
     }
 
     return true;
+  }
+
+  _influxDbPing(hosts) {
+    hosts.forEach((host) => {
+      if (!host.online) {
+        this._logger.error(`${host.url.host} is offline`);
+        this._logger.info(`Reconnecting influxDB host ${process.env.DB_ADR}`);
+        this._influx = new InfluxDB(process.env.DB_ADR);
+      }
+    });
   }
 }
