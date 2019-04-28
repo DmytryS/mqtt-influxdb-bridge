@@ -95,6 +95,7 @@ export default class Bridge {
         this._logger.error(`${host.url.host} is offline`);
         this._logger.info(`Reconnecting influxDB host ${process.env.DB_ADR}`);
         this._influx = new InfluxDB(process.env.DB_ADR);
+        this._influx.ping(5000).then(this._influxDbPing);
       }
     });
   }
