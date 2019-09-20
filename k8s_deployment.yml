@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-influxdb-bridge
+  labels:
+    app: mqtt-influxdb-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqtt-influxdb-bridge
+  template:
+    metadata:
+      labels:
+        app: mqtt-influxdb-bridge
+    spec:
+      containers:
+      - name: mqtt-influxdb-bridge
+        image: loginkr/mqtt-influxdb-bridge:latest
+        imagePullPolicy: Always
+        env:
+        - name: BROKER_ADR
+          value: mqtt://{{USER}}:{{PASSWORD}}@{{URL}}:{{PORT}}
+        - name: DB_ADR
+          value: http://{{URL}}:{{PORT}}
+        - name: DB
+          value: {{DB}}
