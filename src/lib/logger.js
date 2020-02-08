@@ -1,31 +1,15 @@
-import log4js from 'log4js';
-import fs from 'fs';
+import winston from 'winston'
 
-const pathToFile = `${process.cwd()}/logs`;
+const logger = winston.createLogger({
+  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    winston.format.printf((info) => `${info.timestamp} [${info.level}]: ${info.message} ${info.stack || ''}`),
+  ),
+  transports: [new winston.transports.Console()],
+})
 
-if (!fs.existsSync(pathToFile)) {
-  fs.mkdirSync(pathToFile);
-}
-const appenders = {
-  file: {
-    type: 'file',
-    filename: `${process.cwd()}/logs/${process.env.NODE_ENV}-app.log`,
-    timezoneOffset: 0,
-  },
-};
-const categories = {
-  default: { appenders: ['file'], level: 'info' },
-};
-
-if (process.env.NODE_ENV !== '') {
-  // production
-  appenders.console = {
-    type: 'console',
-  };
-  categories.default.appenders.push('console');
-  categories.default.level = 'debug';
-}
-
-log4js.configure({ categories, appenders });
-
-export default log4js;
+export default logger

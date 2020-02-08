@@ -20,8 +20,8 @@ spec:
         imagePullPolicy: Always
         env:
         - name: BROKER_ADR
-          value: mqtt://{{USER}}:{{PASSWORD}}@{{URL}}:{{PORT}}
+          value: mqtt://{USER}:{PASSWORD}@{URL}:{PORT}
         - name: DB_ADR
-          value: http://{{URL}}:{{PORT}}
+          value: http://influxdb.influxdb.svc.cluster.local:8086
         - name: DB
-          value: {{DB}}
+          value: mqtt

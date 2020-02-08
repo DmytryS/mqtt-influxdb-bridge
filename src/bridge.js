@@ -1,17 +1,18 @@
 import mqtt from 'mqtt';
 import { InfluxDB } from 'influx';
-import { logger } from './lib';
+import { logger } from './lib/index.js';
+
+const { BROKER_ADR, DB_ADR, DB } = process.env
 
 export default class Bridge {
   constructor() {
-    this._logger = logger.getLogger('Bridge');
-    this._mqttClient = mqtt.connect(process.env.BROKER_ADR);
+    this._mqttClient = mqtt.connect(BROKER_ADR);
     this._mqttClient.on('error', this._onMqttError.bind(this));
     this._mqttClient.on('connect', this._onConnectBroker.bind(this));
     this._mqttClient.on('close', this._onDisconnectBroker.bind(this));
 
-    this._logger.info(`Connecting to InfluxDB host ${process.env.DB_ADR}`);
-    this._influx = new InfluxDB(process.env.DB_ADR);
+    logger.info(`Connecting to InfluxDB host ${DB_ADR}`);
+    this._influx = new InfluxDB(DB_ADR);
     this._influx.ping(5000).then(this._influxDbPing);
   }
 
@@ -28,13 +29,11 @@ export default class Bridge {
   }
 
   _onConnectBroker() {
-    this._logger.info(`Connected to mqtt broker: ${process.env.BROKER_ADR}`);
+    logger.info(`Connected to mqtt broker: ${BROKER_ADR}`);
   }
 
   _onDisconnectBroker() {
-    this._logger.info(
-      `Disconnected from mqtt broker: ${process.env.BROKER_ADR}`,
-    );
+    logger.info(`Disconnected from mqtt broker: ${BROKER_ADR}`);
   }
 
   async _saveToDB(topic, message) {
@@ -62,28 +61,28 @@ export default class Bridge {
           },
         ],
         {
-          database: process.env.DB,
+          database: DB,
           precision: 's',
         },
       );
     } catch (error) {
-      this._logger.error('An error occured during saving data to DB', error);
+      logger.error('An error occured during saving data to DB', error);
     }
   }
 
   _onMqttError(error) {
     if (error) {
-      this._logger.error('MQTT error:', error);
+      logger.error('MQTT error:', error);
     }
   }
 
   async _checkIfDbExists() {
     const databaseNames = await this._influx.getDatabaseNames();
 
-    if (!databaseNames.includes(process.env.DB)) {
-      this._logger.info(`Creating InfluxDb database ${process.env.DB}`);
+    if (!databaseNames.includes(DB)) {
+      logger.info(`Creating InfluxDb database ${DB}`);
 
-      return this._influx.createDatabase(process.env.DB);
+      return this._influx.createDatabase(DB);
     }
 
     return true;
@@ -92,9 +91,9 @@ export default class Bridge {
   _influxDbPing(hosts) {
     hosts.forEach((host) => {
       if (!host.online) {
-        this._logger.error(`${host.url.host} is offline`);
-        this._logger.info(`Reconnecting influxDB host ${process.env.DB_ADR}`);
-        this._influx = new InfluxDB(process.env.DB_ADR);
+        logger.error(`${host.url.host} is offline`);
+        logger.info(`Reconnecting influxDB host ${DB_ADR}`);
+        this._influx = new InfluxDB(DB_ADR);
         this._influx.ping(5000).then(this._influxDbPing);
       }
     });
