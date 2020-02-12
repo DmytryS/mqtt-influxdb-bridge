@@ -37,17 +37,17 @@ export default class Bridge {
     logger.info(`Disconnected from mqtt broker: ${BROKER_ADR}`)
   }
 
-  async _saveToDB(topic, message) {
+  async _saveToDB(topic, value) {
     try {
-      const [location, device, measurement] = topic.split('/')
-      const messageString = message.toString()
+      const [location, device, measurement] = topic.split('/').filter(str => str.length > 0)
+      const valueString = value.toString()
       const fields = {}
 
       // eslint-disable-next-line
-      if (isNaN(messageString)) {
-        fields.string = messageString
+      if (isNaN(value)) {
+        fields.string = valueString
       } else {
-        fields.value = parseFloat(messageString)
+        fields.value = parseFloat(valueString)
       }
 
       await this._influx.writePoints(
