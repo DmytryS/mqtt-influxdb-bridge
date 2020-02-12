@@ -9,7 +9,5 @@ RUN npm install
 
 FROM base AS release
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
-COPY --from=dependencies /usr/src/app/build ./build
 RUN rm -f package-lock.json
-RUN rm -rf src
 CMD ["npm", "start"]
