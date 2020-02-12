@@ -2,13 +2,11 @@
   "name": "mqtt-influxdb-bridge",
   "version": "1.0.0",
   "description": "Bridge for saving messages from mqtt to influxdb",
-  "main": "./src/app.js",
+  "main": "./src/index.js",
+  "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node ./build/src/app.js",
-    "dev": "NODE_ENV=development  nodemon --exec babel-node  ./src/app.js",
-    "clean": "rm -rf build && mkdir build",
-    "build-server": "babel -d ./build ./ -s --ignore 'node_modules/**/*.js'",
-    "build": "npm run clean && npm run build-server",
+    "start": "NODE_ENV=production node --experimental-modules ./src/index.js",
+    "dev": "NODE_ENV=development  nodemon --experimental-modules ./src/index.js",
     "lint": "eslint src/ --quiet",
     "lint:fix": "eslint src/ --fix"
   },
@@ -28,13 +26,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
     "eslint": "^5.11.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
     "nodemon": "^1.18.10"
   }
 }
