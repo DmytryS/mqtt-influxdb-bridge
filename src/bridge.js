@@ -39,6 +39,8 @@ export default class Bridge {
 
   async _saveToDB(topic, value) {
     try {
+      logger.info(`Received data: ${topic} ${value}`)
+
       const [location, device, measurement] = topic.split('/').filter(str => str.length > 0)
       const valueString = value.toString()
       const fields = {}
