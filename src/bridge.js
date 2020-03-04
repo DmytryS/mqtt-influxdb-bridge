@@ -14,7 +14,7 @@ export default class Bridge {
 
     logger.info(`Connecting to InfluxDB host ${DB_ADR}`)
     this._influx = new InfluxDB(DB_ADR)
-    this._influx.ping(5000).then(this._influxDbPing)
+    this._influx.ping(5000).then(this._influxDbPing.bind(this))
   }
 
   async connect() {
